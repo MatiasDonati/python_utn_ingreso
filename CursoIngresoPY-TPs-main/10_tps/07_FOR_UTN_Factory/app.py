@@ -5,8 +5,8 @@ from tkinter.simpledialog import askstring as prompt
 import customtkinter
 
 '''
-Nombre: 
-Apellido: 
+Nombre: Matias
+Apellido: Donati
 
 === TP 7 (FOR) UTN Factory ===
 Enunciado:

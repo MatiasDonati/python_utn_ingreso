@@ -11,7 +11,7 @@ Al presionar el botón Mostrar 5 veces un mensaje (utilizando el Dialog Alert) c
 '''
 
 class App(customtkinter.CTk):
-    
+
     def __init__(self):
         super().__init__()
 

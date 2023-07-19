@@ -25,8 +25,12 @@ class App(customtkinter.CTk):
     def btn_mostrar_on_click(self):
         numeros = [1, 2, 3, 4, 5]
 
-        for elemento in numeros:
-            alert(message=elemento)
+        for i in numeros:
+            alert(message=i)
+
+        # SIN LISTA
+        for i in range(1, 6):
+            alert(message=i)
 
 if __name__ == "__main__":
     app = App()

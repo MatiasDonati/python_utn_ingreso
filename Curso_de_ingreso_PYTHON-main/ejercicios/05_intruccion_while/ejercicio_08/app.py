@@ -71,7 +71,6 @@ class App(customtkinter.CTk):
                     suma_positivos = suma_positivos + elemento
                 for elemento in lista_de_numeros_negativos:
                     multiplicacion_negativos = multiplicacion_negativos * elemento
-
                 self.txt_suma_acumulada.insert(0, suma_positivos)
                 self.txt_producto.insert(0, multiplicacion_negativos)
 

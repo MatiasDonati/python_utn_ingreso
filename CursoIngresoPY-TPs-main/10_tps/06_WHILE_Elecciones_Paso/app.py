@@ -128,15 +128,16 @@ class App(customtkinter.CTk):
             else:
                 no_binario += 1
 
-            if masculinos > femeninos and masculinos > no_binario:
-                genero_predominante = "Masculino"
-            elif femeninos > masculinos and femeninos > no_binario:
-                genero_predominante = "Femenino"
-            else:
-                genero_predominante = "No Binario"
-
             suma_edades += edad_candidato
             total_votos = total_votos + votos_candidato
+
+        if masculinos > femeninos and masculinos > no_binario:
+            genero_predominante = "Masculino"
+        # elif femeninos > masculinos and femeninos > no_binario:
+        elif femeninos > no_binario:
+            genero_predominante = "Femenino"
+        else:
+            genero_predominante = "No Binario"
 
         promedio = suma_edades / contador
 

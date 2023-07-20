@@ -67,7 +67,7 @@ class App(customtkinter.CTk):
             seguir_cargando_numeros = question("", "Ingresa mas numeros?")
             if seguir_cargando_numeros is False:
                 break
-                     
+
         for i in self.lista:
             if i > 0:
                 print("MAYOR a CERO")

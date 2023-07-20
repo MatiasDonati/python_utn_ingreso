@@ -130,7 +130,7 @@ class App(customtkinter.CTk):
 
             if masculinos > femeninos and masculinos > no_binario:
                 genero_predominante = "Masculino"
-            elif femeninos > masculinos and masculinos > no_binario:
+            elif femeninos > masculinos and femeninos > no_binario:
                 genero_predominante = "Femenino"
             else:
                 genero_predominante = "No Binario"

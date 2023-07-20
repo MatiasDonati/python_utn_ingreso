@@ -16,7 +16,18 @@ Informar:
     B. Nombre y edad del candidato con menos votos.
     C. El promedio de edades de los candidatos.
     D. Total de votos emitidos.
-Todos los datos se ingresan por prompt y los resultados se muestran por consola (print)
+
+e. se pide ingresar el sexo (M , F , NB) , informar cuantos candidatos hay de cada sexo
+
+f. se pide ingresar nivel de aceptacion de imagen del candidato (entre -100 y 100) informar el
+nombre y sexo del que mejor nivel tiene
+
+g.de las personas de sexo femenino ,informar cuanta hay mayores a 50 y cuantas menores a esa edad
+
+h. de que sexo hubo mas candidatos
+
+Todos los datos se ingresan por prompt y los resultados por consola (print)
+
 '''
 
 class App(customtkinter.CTk):
@@ -43,6 +54,17 @@ class App(customtkinter.CTk):
         total_votos = 0
         flag = True
         seguir_cargando_candidatos = True
+        genero_masculino = 0
+        genero_femenino = 0
+        genero_no_binario = 0
+        candidato_mejor_nivel = ""
+        sexo_candidato_mejor_nivel = ""
+        femenino_mayor_a_50 = 0
+        femenino_menor_a_50 = 0
+        masculinos = 0
+        femeninos = 0
+        no_binario = 0
+        genero_predominante = ""
 
         while seguir_cargando_candidatos:
             contador += 1
@@ -57,6 +79,13 @@ class App(customtkinter.CTk):
             while votos_candidato == None or votos_candidato.isdigit() == False or int(votos_candidato) < 0:
                 votos_candidato = prompt("", "Votos Candidato")
             votos_candidato = int(votos_candidato)
+            genero = prompt("", "Genero del candidato").upper()
+            while genero == None or genero == "" or genero.isdigit() == True or genero != "M" and genero != "F" and genero != "NB":
+                genero = prompt("", "Genero del candidato... M, F o NB").upper()
+            nivel_de_aceptacion = prompt("", "Nivel de aceptacion")
+            while nivel_de_aceptacion == None or nivel_de_aceptacion == "" or nivel_de_aceptacion.isdigit() == False or int(nivel_de_aceptacion) < -100 or int(nivel_de_aceptacion) > 100:
+                nivel_de_aceptacion = prompt("", "Nivel de aceptacion... entre -100 y 100")
+            nivel_de_aceptacion = int(nivel_de_aceptacion)
 
             seguir_cargando_candidatos = question("", "Desea seguir ingresando Candidatos??")
 
@@ -77,11 +106,47 @@ class App(customtkinter.CTk):
                 perdedor = candidato
                 edad_perdedor = edad_candidato
 
+            if genero == "M":
+                genero_masculino += 1
+            elif genero == "F":
+                genero_femenino += 1
+            else:
+                genero_no_binario += 1
+
+            if nivel_de_aceptacion > -100:
+                candidato_mejor_nivel = candidato
+                sexo_candidato_mejor_nivel = genero
+
+            if genero == "F":
+                femeninos += 1
+                if edad_candidato > 50:
+                    femenino_mayor_a_50 += 1
+                else:
+                    femenino_menor_a_50 += 1
+            elif genero == "M":
+                masculinos += 1
+            else:
+                no_binario += 1
+
+            if masculinos > femeninos and masculinos > no_binario:
+                genero_predominante = "Masculino"
+            elif femeninos > masculinos and masculinos > no_binario:
+                genero_predominante = "Femenino"
+            else:
+                genero_predominante = "No Binario"
+
             suma_edades += edad_candidato
-            promedio = suma_edades / (contador + 1)
             total_votos = total_votos + votos_candidato
 
-        mensaje = f"{ganador} es el Ganador.\n\n{perdedor} con edad de {edad_perdedor} años es el Perdedor.\n\nEl promedio en edad de los candidatos es de {promedio}.\n\nEl total de votos emitidos fue de {total_votos} votos"
+        promedio = suma_edades / contador
+
+        mensaje = f"""{ganador} es el Ganador.\n\n{perdedor} con edad de {edad_perdedor}
+        años es el Perdedor.\n\nEl promedio en edad de los candidatos es de {promedio}.\n\n
+        El total de votos emitidos fue de {total_votos} votos\n\n Hay {genero_masculino} candidatos de genero Masculino, 
+        hay {genero_femenino} candidatos de genero femenino y hay {genero_no_binario} de genero no Binario.\n\n
+        El candidato con mejor imagen es {candidato_mejor_nivel} y es de genero {sexo_candidato_mejor_nivel}\n\n
+        De los candidatos de genero Femenino hay {femenino_mayor_a_50} mayores a 50 años y {femenino_menor_a_50} menores a 50 años.\n\n
+        El genero predominante de todos los candidatos es {genero_predominante}"""
 
         alert(message=mensaje)
 

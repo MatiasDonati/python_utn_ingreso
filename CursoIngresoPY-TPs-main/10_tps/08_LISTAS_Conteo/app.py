@@ -89,7 +89,7 @@ class App(customtkinter.CTk):
 
                 if i < self.negativo_menor:
                     self.negativo_menor = i
-               
+
                 self.contador_negativos = self.contador_negativos + 1
             else:
                 print("Es CERO")

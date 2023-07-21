@@ -7,6 +7,9 @@ import random
 
 
 '''
+==========
+Matias Donati
+==========
 Al presionar el botón Mostrar 5 veces un mensaje (utilizando el Dialog Alert) con números ASCENDENTES, desde el 1 al 5.
 '''
 
@@ -23,12 +26,19 @@ class App(customtkinter.CTk):
 
 
     def btn_mostrar_on_click(self):
-        numeros = [1, 2, 3, 4, 5]
 
-        for el in numeros:
-            alert(message=el)
-            if  el == 5:
-                alert(message="ULTIMO BUCLE, CHAU!!")
+        decrementador = 5
+
+        for _ in range(5):
+            alert(message=decrementador)
+            decrementador = decrementador -1
+
+        # numeros = [1, 2, 3, 4, 5]
+
+        # for el in numeros:
+        #     alert(message=el)
+        #     if  el == 5:
+        #         alert(message="ULTIMO BUCLE, CHAU!!")
 
 if __name__ == "__main__":
     app = App()

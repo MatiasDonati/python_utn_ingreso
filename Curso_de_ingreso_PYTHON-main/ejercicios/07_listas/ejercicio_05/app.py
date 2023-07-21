@@ -24,6 +24,11 @@ class App(customtkinter.CTk):
 
 
     def btn_calcular_on_click(self):
+
+        # for indice in range(len(self.lista_datos)):
+        #     print(self.lista_datos[indice])
+
+
         # suma = sum(self.lista_datos)
         suma = 0
         for el in self.lista_datos:

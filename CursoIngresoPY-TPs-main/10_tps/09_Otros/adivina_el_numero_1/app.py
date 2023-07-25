@@ -59,19 +59,16 @@ class App(customtkinter.CTk):
         self.btn_mostrar.grid_remove()
         # ó grid.forget()
 
-
     def btn_reset_on_click(self):
         self.mostrar_botones()
         self.inicio_juego()
 
     def btn_mostrar_on_click(self):
 
-
         if(self.flag_play):
             numero_jugador_texto = self.txt_numero.get()
             numero_jugaror_numero = int(numero_jugador_texto)
             self.numero_intento += 1
-
 
             if  (numero_jugaror_numero == self.numero_secreto):
                 ts_fin_juego = time.time()

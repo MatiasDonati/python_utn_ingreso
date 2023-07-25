@@ -5,7 +5,6 @@ from tkinter.simpledialog import askstring as prompt
 import customtkinter
 import random
 
-
 '''
 Nombre: 
 Apellido: 

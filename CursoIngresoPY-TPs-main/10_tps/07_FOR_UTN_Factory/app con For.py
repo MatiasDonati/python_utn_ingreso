@@ -96,7 +96,7 @@ class App(customtkinter.CTk):
                     flag_junior = False
                 if edad < edad_jr:
                     nombre_junior = nombre
-           
+
             if genero == "M":
                 lista_masculinos.append(edad)
             elif genero == "F":
@@ -110,7 +110,7 @@ class App(customtkinter.CTk):
                 js = js + 1
             else:
                 python = python + 1
-       
+
         if asp_net > js and asp_net > python:
             tecnologia_ganadora = "ASP.NET"
         elif js > python:
@@ -121,32 +121,32 @@ class App(customtkinter.CTk):
         suma_masculinos = 0
         for i in lista_masculinos:
             suma_masculinos = suma_masculinos + i
-           
+
         suma_femeninos = 0
         for i in lista_femeninos:
             suma_femeninos = suma_femeninos + i
-           
+
         suma_no_binarios = 0
         for i in lista_no_binarios:
             suma_no_binarios = suma_no_binarios + i
-       
+
         promedio_edad_masculinos = suma_masculinos / len(lista_masculinos)
         promedio_edad_femeninos = suma_femeninos / len(lista_femeninos)
         promedio_edad_no_binarios = suma_no_binarios / len(lista_no_binarios)
-           
+
         total_generos = suma_femeninos + suma_masculinos + suma_no_binarios
 
 
         porcentaje_masculino = (suma_masculinos / total_generos) * 100
         porc_masc_redondeado = round(porcentaje_masculino, 2)
-   
+
         porcentaje_femenino = (suma_femeninos / total_generos) * 100
         porc_fem_redondeado = round(porcentaje_femenino, 2)
 
         porcentaje_no_binario = (suma_no_binarios / total_generos) * 100
         porc_no_bin_redondeado = round(porcentaje_no_binario, 2)
 
-   
+
         mensaje = f"""La cantidad de postulantes de genero no binario que programan en ASP.NET o JS cuya edad este entre 25 y 40,
         que se postularon para un puesto Ssr es de un total de {nb_js_asp} personas.\n\n El postulante Jr. con menor edad es {nombre_junior}.
         El promedio de edades de genero Masculino es de {promedio_edad_masculinos}

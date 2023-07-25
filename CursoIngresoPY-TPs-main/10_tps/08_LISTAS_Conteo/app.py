@@ -111,7 +111,7 @@ class App(customtkinter.CTk):
         \nEl promedio de los negativos es {self.promedio_negativos}."""
 
         alert(message=mensaje)
-   
+
 if __name__ == "__main__":
     app = App()
     app.geometry("300x300")

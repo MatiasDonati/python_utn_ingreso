@@ -6,8 +6,8 @@ import customtkinter
 import random
 
 '''
-Nombre: 
-Apellido: 
+Nombre: Matias
+Apellido: Donati
 
 Enunciado:
 
@@ -47,7 +47,7 @@ la siguiente información:
 '''
 
 class App(customtkinter.CTk):
-    
+
     def __init__(self):
         super().__init__()
 
@@ -59,22 +59,73 @@ class App(customtkinter.CTk):
 
         self.btn_mostrar_notas = customtkinter.CTkButton(master=self, text="Mostrar Notas", command=self.btn_mostrar_notas_on_click)
         self.btn_mostrar_notas.grid(row=1, pady=20, columnspan=2, sticky="news")
-        
+
         self.btn_generar_informe_notas = customtkinter.CTkButton(master=self, text="Generar Informe de Notas", command=self.btn_generar_informe_notas_on_click)
         self.btn_generar_informe_notas.grid(row=2, pady=20, columnspan=2, sticky="news")
-        
-            
+
     def btn_ingresar_notas_on_click(self):
-        pass
-        
-    def btn_generar_informe_notas_on_click(self):
-        pass
-        
+
+        self.lista_notas = []
+        self.contador = 0
+        flag = True
+        self.suma_notas = 0
+        self.cantidad_10 = 0
+
+        while flag:
+            self.contador += 1
+            nota_ingresada = prompt("", f"Ingrese Nota nro{self.contador}")
+            if nota_ingresada == None:
+                break
+            while nota_ingresada == "" or nota_ingresada.isalpha() == True or int(nota_ingresada) < 0 or int(nota_ingresada) > 10:
+                nota_ingresada = prompt("", f"Ingrese Nota nro{self.contador} ..  entre 0 y 10")
+                if nota_ingresada == None:
+                    flag = False
+                    break
+
+            nota_ingresada = int(nota_ingresada)
+            self.lista_notas.append(nota_ingresada)
+        # alert(message=self.lista_notas)
+
     def btn_mostrar_notas_on_click(self):
-        pass
+        for indice in range(len(self.lista_notas)):
+            numero = self.lista_notas[indice]
+            print(f"{indice + 1} - Nota: {numero}")
+
+    def btn_generar_informe_notas_on_click(self):
+        flag_nota = True
+        for nota in self.lista_notas:
+            if flag_nota:
+                self.nota_mas_baja = nota
+                self.nota_mas_alta = nota
+                flag_nota = False
+            if nota < self.nota_mas_baja:
+                self.nota_mas_baja = nota
+            if nota > self.nota_mas_alta:
+                self.nota_mas_alta = nota
+            self.suma_notas = self.suma_notas + nota
+            if nota == 10:
+                self.cantidad_10 += 1
+        promedio = self.suma_notas / len(self.lista_notas)
+        promedio_redondeado = round(promedio, 2)
+
+        match promedio_redondeado:
+            case 0 | 1| 2 | 3:
+                mensaje = "El promedio desaprobo"
+            case 4 | 5 | 6:
+                mensaje = "El promedio aprobo"
+            case _:
+                mensaje = "El promedio promociono"
+
+        # if promedio_redondeado < 3:
+        #     mensaje = "El promedio desaprobo"
+        # elif promedio_redondeado >= 4 or promedio_redondeado <= 7:
+        #     mensaje = "El promedio aprobo"
+        # else:
+        #     mensaje = "El promedio promociono"
+
+        alert(message=mensaje)
 
 if __name__ == "__main__":
     app = App()
     app.geometry("300x300")
-    app.mainloop()  
-            
+    app.mainloop()

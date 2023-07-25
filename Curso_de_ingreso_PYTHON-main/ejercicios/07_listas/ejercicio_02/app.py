@@ -10,7 +10,7 @@ Al presionar el botón 'MOSTRAR', se deberán mostrar los números almacenados e
 '''
 
 class App(customtkinter.CTk):
-    
+
     def __init__(self):
         super().__init__()
 
@@ -31,7 +31,8 @@ class App(customtkinter.CTk):
             alert(message=el)
 
     def btn_cargar_on_click(self):
-        while len(self.lista_datos) < 3:
+        # while len(self.lista_datos) < 3:
+        for _ in range(3):
             numero_ingresado = int(prompt("", "Ingresa un numero"))
             self.lista_datos.append(numero_ingresado)
 

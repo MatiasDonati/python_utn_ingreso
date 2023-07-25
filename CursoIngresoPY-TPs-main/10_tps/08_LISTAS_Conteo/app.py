@@ -5,8 +5,8 @@ from tkinter.simpledialog import askstring as prompt
 import customtkinter
 
 '''
-Nombre:
-Apellido:
+Nombre: Matias
+Apellido: Donati
 
 === TP 8 (LIST) Conteo ===
 Enunciado:
@@ -22,6 +22,15 @@ Luego calcular:
     G. El maximo de los positivos
     H. El promedio de los negativos
 
+    Nivel A:
+
+    i. El listado de numeros pares
+    j. Que se ingreso mas?, positivos, negativos o cero.
+
+    Nivel Ninja:
+
+    k. El listado de los numeros mayores, si es que hay mas de un mayor
+
 Informar los resultados mediante alert.
 '''
 
@@ -32,10 +41,10 @@ class App(customtkinter.CTk):
 
         # configure window
         self.title("UTN FRA")
-   
+
         self.btn_cargar = customtkinter.CTkButton(master=self, text="Comenzar Ingreso", command=self.btn_comenzar_ingreso_on_click)
         self.btn_cargar.grid(row=2, padx=20, pady=20, columnspan=2, sticky="nsew")
-       
+
         self.btn_mostrar = customtkinter.CTkButton(master=self, text="Mostrar Estadísticas", command=self.btn_mostrar_estadisticas_on_click)
         self.btn_mostrar.grid(row=3, padx=20, pady=20, columnspan=2, sticky="nsew")
 
@@ -43,23 +52,18 @@ class App(customtkinter.CTk):
         self.suma_negativos = 0
         self.suma_positivos = 0
         self.acumulador = 0
-        self.cantidad_positivos = 0 
-        self.cantidad_negativos = 0 
-        self.cantidad_ceros = 0 
+        self.cantidad_positivos = 0
+        self.cantidad_negativos = 0
+        self.cantidad_ceros = 0
         self.negativo_menor = None
         self.positivo_mayor = None
         self.contador_negativos = 0
 
     def btn_comenzar_ingreso_on_click(self):
 
-        # VALIDAR SI NO HAY INGRESO DE ALGUN TIPO DE NUMEROS POSITIVO, NEGATIVO O CERO !!
-        # VALIDAR SI NO HAY INGRESO DE ALGUN TIPO DE NUMEROS POSITIVO, NEGATIVO O CERO !!
-        # VALIDAR SI NO HAY INGRESO DE ALGUN TIPO DE NUMEROS POSITIVO, NEGATIVO O CERO !!
-
         while True:
             numero = prompt("", "Ingresar numero")
-            #pongo isdigit despues de alpha para evitar que se rompa con signos como "-" etc.
-            while numero == None or numero == "" or numero.isalpha() == True or numero.isdigit() == False:
+            while numero == None or numero == "" or numero.isalpha() == True:
                 numero = prompt("", "Ingresar numero.. NUMERO!")
             numero = int(numero)
             self.lista.append(numero)
@@ -78,10 +82,10 @@ class App(customtkinter.CTk):
                     self.positivo_mayor = i
                 if i > self.positivo_mayor:
                     self.positivo_mayor = i
-   
+
             elif i < 0:
                 print("MENOR a CERO")
-                self.suma_negativos = self.suma_negativos + i 
+                self.suma_negativos = self.suma_negativos + i
                 self.cantidad_negativos = self.cantidad_negativos + 1
 
                 if self.negativo_menor == None:

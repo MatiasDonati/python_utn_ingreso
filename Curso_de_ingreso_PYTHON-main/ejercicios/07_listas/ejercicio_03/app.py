@@ -24,10 +24,10 @@ class App(customtkinter.CTk):
 
 
     def btn_calcular_on_click(self):
-        numero_mas_alto = 0
+        numero_mas_alto = None
 
         for el in self.lista_datos:
-            if el > numero_mas_alto:
+            if numero_mas_alto == None or el > numero_mas_alto:
                 numero_mas_alto = el
 
         alert(message=f"El numero mas grande es {numero_mas_alto}")

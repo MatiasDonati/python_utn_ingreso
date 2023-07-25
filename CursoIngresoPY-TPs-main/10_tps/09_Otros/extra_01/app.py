@@ -56,11 +56,14 @@ class App(customtkinter.CTk):
 
         self.lista_nombre_articulo = []
         self.lista_precio_articulo = []
+        self.indices_mas_caros_que_el_promedio = []
+        self.indices_mas_baratos_que_el_promedio = []
         self.artiulo_mas_caro = 0
         self.artiulo_mas_barato = 0
         self.flag_precio = True
         self.indice_mas_barato = 0
         self.indice_mas_caro = 0
+        self.suma_precios = 0
 
     def btn_agregar_on_click(self):
 
@@ -74,6 +77,7 @@ class App(customtkinter.CTk):
                 self.txt_precio_articulo.insert(0, "Error")
                 alert(message="😲 😲 😲\nIngrese Articulo en MAYUSCULAS\nY Precio en NUMEROS ENTEROS!")
             else:
+                precio = int(precio)
                 self.lista_nombre_articulo.append(articulo)
                 self.lista_precio_articulo.append(precio)
                 alert(message="😀*😀*😀*😀\n Se Cargo Correctamente!")
@@ -87,6 +91,7 @@ class App(customtkinter.CTk):
         for indice, precio in enumerate(self.lista_precio_articulo):
             mensaje = f"{indice + 1} - {precio}"
             print(mensaje)
+            self.suma_precios = self.suma_precios + precio
 
             if self.flag_precio:
                 self.artiulo_mas_barato = precio
@@ -100,14 +105,34 @@ class App(customtkinter.CTk):
             if precio > self.artiulo_mas_caro:
                 self.indice_mas_caro = indice
 
+        self.promedio = self.suma_precios / len(self.lista_precio_articulo)
+        self.promedio_redondeado = round(self.promedio, 2)
+        print(self.promedio)
+
+        for indice, precio in enumerate(self.lista_precio_articulo):
+            if precio > self.promedio_redondeado:
+                self.indices_mas_caros_que_el_promedio.append(indice)
+            elif precio < self.promedio_redondeado:
+                self.indices_mas_baratos_que_el_promedio.append(indice)
 
     def btn_informar_on_click(self):
+
         mensaje = f"""El producto mas barato es: {self.lista_nombre_articulo[self.indice_mas_barato]}
 con un precio de ${self.lista_precio_articulo[self.indice_mas_barato]}\n\n
 El producto mas caro es: {self.lista_nombre_articulo[self.indice_mas_caro]}
-con un precio de ${self.lista_precio_articulo[self.indice_mas_caro]}"""
-
+con un precio de ${self.lista_precio_articulo[self.indice_mas_caro]}
+El promedio de precios es {self.promedio_redondeado}"""
         print(mensaje)
+
+        mensaje_2 = f"Productos mas Caros que el pomedio son:" 
+        print(mensaje_2)
+        for i in self.indices_mas_caros_que_el_promedio:
+            print(self.lista_nombre_articulo[i])
+
+        mensaje_3 = f"Productos mas Baratos que el pomedio son:" 
+        print(mensaje_3)
+        for i in self.indices_mas_baratos_que_el_promedio:
+            print(self.lista_nombre_articulo[i])
 
 if __name__ == "__main__":
     app = App()

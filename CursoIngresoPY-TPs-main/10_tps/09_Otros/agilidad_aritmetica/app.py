@@ -6,8 +6,8 @@ import customtkinter
 import random
 
 '''
-Nombre: 
-Apellido: 
+Nombre: Matias
+Apellido: Donati
 
 Enunciado:
 Debemos mostrar dos números Random del 1 al 10 y una de las cuatro operaciones básicas (suma, resta y multiplicación) 
@@ -69,7 +69,7 @@ class App(customtkinter.CTk):
         if resultado_usuario == suma:
             alert(message="Correcto!")
         else:
-            alert(message="Incorrecto")
+            alert(message=f"Incorrecto\nEl resultado es {suma}")
         self.funcion_post_operacion()
 
     def btn_restar_on_click(self):
@@ -78,7 +78,7 @@ class App(customtkinter.CTk):
         if resultado_usuario == resta:
             alert(message="Correcto!")
         else:
-            alert(message="Incorrecto")
+            alert(message=f"Incorrecto\nEl resultado es {resta}")
         self.funcion_post_operacion()
 
     def btn_multiplicar_on_click(self):
@@ -88,7 +88,7 @@ class App(customtkinter.CTk):
         if resultado_usuario == multiplicar:
             alert(message="Correcto!")
         else:
-            alert(message="Incorrecto")
+            alert(message=f"Incorrecto\nEl resultado es {multiplicar}")
         self.funcion_post_operacion()
 
 
@@ -118,4 +118,4 @@ class App(customtkinter.CTk):
 if __name__ == "__main__":
     app = App()
     app.geometry("300x300")
-    app.mainloop()
+    app.mainloop() 

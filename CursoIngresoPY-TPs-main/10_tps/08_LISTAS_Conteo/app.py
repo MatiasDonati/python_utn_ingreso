@@ -61,7 +61,7 @@ class App(customtkinter.CTk):
         self.contador_pares = 0
         self.numero_predominante = ""
         self.cantidad_numero_mayor = 0
-
+    # asdasdasd
     def btn_comenzar_ingreso_on_click(self):
 
         while True:

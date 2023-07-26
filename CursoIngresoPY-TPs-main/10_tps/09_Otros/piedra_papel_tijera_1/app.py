@@ -6,12 +6,12 @@ import customtkinter
 import random
 
 '''
-Nombre: 
-Apellido: 
+Nombre:
+Apellido:
 
 Piedra, Papel o Tijera (v 1.0):
     Al comenzar el juego generaremos un número RANDOM del 1 al 3 para la selección de la máquina, siendo 1 para “piedra”, el 2 para “papel” y 3 para “tijera”.
-	El jugador seleccionará mediante uno de los botones su opción y le informaremos si ganó, empató o perdió
+    El jugador seleccionará mediante uno de los botones su opción y le informaremos si ganó, empató o perdió
 '''
 
 class App(customtkinter.CTk):
@@ -33,9 +33,8 @@ class App(customtkinter.CTk):
 
         self.btn_restart = customtkinter.CTkButton(master=self, text="RESTART", command=self.btn_restart_on_click, fg_color="red")
         self.btn_restart.grid(row=5, pady=20, columnspan=2, sticky="nsew")
-        
-        self.cpu_elije()   
-
+       
+        self.cpu_elije()  
 
     def deshabilitar_botones(self):
         self.btn_piedra.configure(state="disabled")
@@ -49,20 +48,32 @@ class App(customtkinter.CTk):
         self.cpu_elije()
 
     def cpu_elije(self):
-        pass
-     
+        self.numero_random = random.randrange(1, 4)
+        print(self.numero_random)
+
     def btn_piedra_on_click(self):
         self.deshabilitar_botones()
-        pass
+        if self.numero_random == 1:
+            mensaje = "FELICITACIONES!"
+        else:
+            mensaje = "PERDEDOR!"
+        alert(message=mensaje)
 
     def btn_papel_on_click(self):
         self.deshabilitar_botones()
-        pass
+        if self.numero_random == 2:
+            mensaje = "FELICITACIONES!"
+        else:
+            mensaje = "PERDEDOR!"
+        alert(message=mensaje)
 
     def btn_tijera_on_click(self):
         self.deshabilitar_botones()
-        pass
-        
+        if self.numero_random == 3:
+            mensaje = "FELICITACIONES!"
+        else:
+            mensaje = "PERDEDOR!"
+        alert(message=mensaje)
 
 if __name__ == "__main__":
     app = App()

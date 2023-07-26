@@ -7,18 +7,18 @@ import random
 
 
 '''
-Nombre: 
-Apellido: 
+Nombre: Matias
+Apellido: Donati
 
 Piedra, Papel o Tijera (v 2.0):
     Al comenzar el juego generaremos un número RANDOM del 1 al 3 para la selección de la máquina, siendo 1 para “piedra”, el 2 para “papel” y 3 para “tijera”.
-	El jugador seleccionará mediante uno de los botones su opción  y le informaremos si ganó, empató o perdió
+    El jugador seleccionará mediante uno de los botones su opción  y le informaremos si ganó, empató o perdió
 
 Ahora debemos informar cuantas veces se ganó, perdió o empató
 '''
 
 class App(customtkinter.CTk):
-    
+   
     def __init__(self):
         super().__init__()
 
@@ -36,9 +36,9 @@ class App(customtkinter.CTk):
 
         self.btn_restart = customtkinter.CTkButton(master=self, text="RESTART", command=self.btn_restart_on_click, fg_color="red")
         self.btn_restart.grid(row=5, pady=20, columnspan=2, sticky="nsew")
-        
+       
         self.cpu_elije()
-        
+       
         self.contador_vitorias_cpu = 0 
         self.contador_vitorias_player_1 = 0 
 
@@ -55,19 +55,38 @@ class App(customtkinter.CTk):
         self.cpu_elije()
 
     def cpu_elije(self):
-        pass
+        self.numero_random = random.randrange(1, 4)
+        print(self.numero_random)
 
     def btn_piedra_on_click(self):
         self.deshabilitar_botones()
-        pass
-
+        if self.numero_random == 1:
+            mensaje = "FELICITACIONES!"
+            self.contador_vitorias_player_1 = self.contador_vitorias_player_1 + 1
+        else:
+            self.contador_vitorias_cpu = self.contador_vitorias_cpu + 1
+            mensaje = "PERDEDOR!"
+            alert(message=mensaje)
+           
     def btn_papel_on_click(self):
         self.deshabilitar_botones()
-        pass
+        if self.numero_random == 2:
+            mensaje = "FELICITACIONES!"
+            self.contador_vitorias_player_1 = self.contador_vitorias_player_1 + 1
+        else:
+            self.contador_vitorias_cpu = self.contador_vitorias_cpu + 1
+            mensaje = "PERDEDOR!"
+            alert(message=mensaje)
 
     def btn_tijera_on_click(self):
         self.deshabilitar_botones()
-        pass
+        if self.numero_random == 3:
+            mensaje = "FELICITACIONES!"
+            self.contador_vitorias_player_1 = self.contador_vitorias_player_1 + 1
+        else:
+            self.contador_vitorias_cpu = self.contador_vitorias_cpu + 1
+            mensaje = "PERDEDOR!"
+            alert(message=mensaje)
 
 if __name__ == "__main__":
     app = App()

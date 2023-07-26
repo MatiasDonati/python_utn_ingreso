@@ -35,7 +35,7 @@ Informar los resultados mediante alert.
 '''
 
 class App(customtkinter.CTk):
-   
+
     def __init__(self):
         super().__init__()
 
@@ -58,6 +58,9 @@ class App(customtkinter.CTk):
         self.negativo_menor = None
         self.positivo_mayor = None
         self.contador_negativos = 0
+        self.contador_pares = 0
+        self.numero_predominante = ""
+        self.cantidad_numero_mayor = 0
 
     def btn_comenzar_ingreso_on_click(self):
 
@@ -99,7 +102,23 @@ class App(customtkinter.CTk):
                 print("Es CERO")
                 self.cantidad_ceros = self.cantidad_ceros + 1
 
-        self.promedio_negativos = self.suma_negativos / self.contador_negativos
+            if i % 2 == 0:
+                self.contador_pares += 1
+
+            if i == self.positivo_mayor:
+                self.cantidad_numero_mayor += 1
+
+        if self.cantidad_negativos > 0:
+            self.promedio_negativos = self.suma_negativos / self.contador_negativos
+        else:
+            self.promedio_negativos = "NO hubo ingreso negativos!"
+
+        if self.cantidad_positivos > self.cantidad_negativos and self.cantidad_positivos > self.cantidad_ceros:
+            self.numero_predominante = "Positivos"
+        elif self.cantidad_negativos > self.cantidad_ceros:
+            self.numero_predominante = "Negativos"
+        else:
+            self.numero_predominante = "Ceros"
 
         print(self.lista)
 
@@ -112,7 +131,11 @@ class App(customtkinter.CTk):
         \nLa cantidad de ceros es {self.cantidad_ceros},
         \nEl minimo de los numeros negativos es {self.negativo_menor},
         \nEl maximo de los positovos es {self.positivo_mayor},
-        \nEl promedio de los negativos es {self.promedio_negativos}."""
+        \nEl promedio de los negativos es {self.promedio_negativos}
+        \nLa cantidad de numeros pares es de {self.contador_pares}
+        considerando al 0 como numero par segun fuentes confiables (aca iban emojissss)
+        \nSe ingresaron mas numeros {self.numero_predominante}
+        \nEl maximo numero ingresado es {self.positivo_mayor} y se ingreso {self.cantidad_numero_mayor} veces."""
 
         alert(message=mensaje)
 

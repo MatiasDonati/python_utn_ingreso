@@ -61,7 +61,8 @@ class App(customtkinter.CTk):
         self.contador_pares = 0
         self.numero_predominante = ""
         self.cantidad_numero_mayor = 0
-    # asdasdasd
+        self.lista_numero_mayor = []
+
     def btn_comenzar_ingreso_on_click(self):
 
         while True:
@@ -119,6 +120,12 @@ class App(customtkinter.CTk):
             self.numero_predominante = "Negativos"
         else:
             self.numero_predominante = "Ceros"
+
+        #lista que ingresa numero mayor las repetidas veces que se cargo
+        for _ in range(self.cantidad_numero_mayor):
+            self.lista_numero_mayor.append(self.positivo_mayor)
+
+        print(self.lista_numero_mayor)
 
         print(self.lista)
 

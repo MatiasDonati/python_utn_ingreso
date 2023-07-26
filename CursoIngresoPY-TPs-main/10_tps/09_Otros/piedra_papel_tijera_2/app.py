@@ -18,7 +18,7 @@ Ahora debemos informar cuantas veces se ganó, perdió o empató
 '''
 
 class App(customtkinter.CTk):
-   
+
     def __init__(self):
         super().__init__()
 
@@ -36,9 +36,12 @@ class App(customtkinter.CTk):
 
         self.btn_restart = customtkinter.CTkButton(master=self, text="RESTART", command=self.btn_restart_on_click, fg_color="red")
         self.btn_restart.grid(row=5, pady=20, columnspan=2, sticky="nsew")
-       
+
+        self.btn_restart = customtkinter.CTkButton(master=self, text="FIN DE JUEGO\nEstadisticas", command=self.btn_fin_on_click, fg_color="green")
+        self.btn_restart.grid(row=6, pady=20, columnspan=2, sticky="nsew")
+
         self.cpu_elije()
-       
+
         self.contador_vitorias_cpu = 0 
         self.contador_vitorias_player_1 = 0 
 
@@ -66,8 +69,8 @@ class App(customtkinter.CTk):
         else:
             self.contador_vitorias_cpu = self.contador_vitorias_cpu + 1
             mensaje = "PERDEDOR!"
-            alert(message=mensaje)
-           
+        alert(message=mensaje)
+
     def btn_papel_on_click(self):
         self.deshabilitar_botones()
         if self.numero_random == 2:
@@ -76,7 +79,7 @@ class App(customtkinter.CTk):
         else:
             self.contador_vitorias_cpu = self.contador_vitorias_cpu + 1
             mensaje = "PERDEDOR!"
-            alert(message=mensaje)
+        alert(message=mensaje)
 
     def btn_tijera_on_click(self):
         self.deshabilitar_botones()
@@ -86,7 +89,19 @@ class App(customtkinter.CTk):
         else:
             self.contador_vitorias_cpu = self.contador_vitorias_cpu + 1
             mensaje = "PERDEDOR!"
-            alert(message=mensaje)
+        alert(message=mensaje)
+
+    def btn_fin_on_click(self):
+        if self.contador_vitorias_player_1 > self.contador_vitorias_cpu:
+            mensaje = f"""FELICITACIONES!!\n\n
+            Le ganaste al PC !
+            Ganate {self.contador_vitorias_player_1} veces y el Pc gańo {self.contador_vitorias_cpu}"""
+        else:
+             mensaje = f"""LOOSER!\n\n
+            Gano el PC
+            PC ganó {self.contador_vitorias_cpu} veces y vos {self.contador_vitorias_player_1}."""
+        alert(message=mensaje)
+
 
 if __name__ == "__main__":
     app = App()

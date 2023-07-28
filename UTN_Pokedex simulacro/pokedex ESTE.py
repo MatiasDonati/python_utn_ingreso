@@ -92,6 +92,18 @@ class App(customtkinter.CTk):
         self.lista_poder_pokemones = []
         self.lista_tipo_pokemones = []
 
+        # self.lista_nombre_pokemones = [
+        #     "Charmander", "Charizard", "Pikachu", "Zapdos", "Mewtwo",
+        #     "Moltres", "Mew", "Blastoise", "Raichu", "Digglet"
+        # ]
+        # self.lista_poder_pokemones = [
+        #     60, 120, 51, 190, 194,
+        #     190, 195, 120, 95, 51
+        # ]
+        # self.lista_tipo_pokemones = [
+        #     "FUEGO", "FUEGO", "ELECTRICO", "ELECTRICO", "PSIQUICO",
+        #     "FUEGO", "PSIQUICO", "AGUA", "ELECTRICO", "TIERRA"
+        # ]
 
     def btn_cargar_pokedex_on_click(self):
         for indice in range(5):
@@ -162,27 +174,31 @@ class App(customtkinter.CTk):
                 acumulador_poder_electrico = acumulador_poder_electrico + 1
                 suma_poder_electrico = suma_poder_electrico + self.lista_poder_pokemones[indice]
 
-        if contador_agua > contador_tierra and contador_agua > contador_psiquico and contador_agua > contador_fuego and contador_agua > contador_electrico:
-            mayor_tipo = "AGUA"
-        elif contador_tierra > contador_psiquico and contador_tierra > contador_fuego and contador_tierra > contador_electrico:
-            mayor_tipo = "TIERRA"
-        elif contador_psiquico > contador_fuego and contador_psiquico > contador_electrico:
-            mayor_tipo = "PSIQUICO"
-        elif contador_fuego > contador_electrico:
-            mayor_tipo = "FUEGO"
+        if contador_agua == contador_tierra and contador_agua == contador_psiquico and contador_agua == contador_fuego and contador_agua == contador_electrico:
+            mayor_tipo = "MISMA CANTIDAD DE TIPOS"
+            menor_tipo = "MISMA CANTIDAD DE TIPOS"
         else:
-            mayor_tipo = "ELECTRICO"
+            if contador_agua > contador_tierra and contador_agua > contador_psiquico and contador_agua > contador_fuego and contador_agua > contador_electrico:
+                mayor_tipo = "AGUA"
+            elif contador_tierra > contador_psiquico and contador_tierra > contador_fuego and contador_tierra > contador_electrico:
+                mayor_tipo = "TIERRA"
+            elif contador_psiquico > contador_fuego and contador_psiquico > contador_electrico:
+                mayor_tipo = "PSIQUICO"
+            elif contador_fuego > contador_electrico:
+                mayor_tipo = "FUEGO"
+            else:
+                mayor_tipo = "ELECTRICO"
 
-        if contador_agua < contador_tierra and contador_agua < contador_psiquico and contador_agua < contador_fuego and contador_agua < contador_electrico:
-            menor_tipo = "AGUA"
-        elif contador_tierra < contador_psiquico and contador_tierra < contador_fuego and contador_tierra < contador_electrico:
-            menor_tipo = "TIERRA"
-        elif contador_psiquico < contador_fuego and contador_psiquico < contador_electrico:
-            menor_tipo = "PSIQUICO"
-        elif contador_fuego < contador_electrico:
-            menor_tipo = "FUEGO"
-        else:
-            menor_tipo = "ELECTRICO"
+            if contador_agua < contador_tierra and contador_agua < contador_psiquico and contador_agua < contador_fuego and contador_agua < contador_electrico:
+                menor_tipo = "AGUA"
+            elif contador_tierra < contador_psiquico and contador_tierra < contador_fuego and contador_tierra < contador_electrico:
+                menor_tipo = "TIERRA"
+            elif contador_psiquico < contador_fuego and contador_psiquico < contador_electrico:
+                menor_tipo = "PSIQUICO"
+            elif contador_fuego < contador_electrico:
+                menor_tipo = "FUEGO"
+            else:
+                menor_tipo = "ELECTRICO"
 
         #para promedio de poder
         for elemento in self.lista_poder_pokemones:

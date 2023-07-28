@@ -1,15 +1,15 @@
 # Copyright (C) 2023 <UTN FRA>
-# 
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -21,7 +21,7 @@ import customtkinter
 
 '''
 ################# INTRODUCCION #################
-#? El profesor OAK de pueblo paleta quiere que construyas un segundo modelo prototipico 
+#? El profesor OAK de pueblo paleta quiere que construyas un segundo modelo prototipico
 #? de pokedex con 10 pokemones de prueba.
 '''
 NOMBRE = 'Matias Donati' # Completa tu nombre completo solo en esa variable
@@ -38,7 +38,7 @@ Los datos que deberas pedir para los pokemones son:
     * El tipo de color (azul , amarillo, blanco , otro).
     * La altura del pokemon en centimetros (validar que sea mayor a 10 y menor a 200).
 
-B)  Al presionar el boton "Mostrar Pokedex" se deberan listar los pokemones y su posicion en la 
+B)  Al presionar el boton "Mostrar Pokedex" se deberan listar los pokemones y su posicion en la
     lista (por terminal), adicionalmente mostrar el informe del punto C.
 
 #!################ ACLARACION IMPORTANTE #################
@@ -46,7 +46,7 @@ Del punto C SOLO debera realizar DOS informes.
 Para determinar que informe hacer, tenga en cuenta lo siguiente:
 
     1- Tome el ultimo numero de su DNI Personal (Ej 4) y realiza ese informe (Ej, Realizar informe 4)
-    2- Tome el ultimo numero de su DNI Personal (Ej 4), y restarselo al numero 9 (Ej 9-4 = 5). 
+    2- Tome el ultimo numero de su DNI Personal (Ej 4), y restarselo al numero 9 (Ej 9-4 = 5).
         Realiza el informe correspondiente al numero obtenido.
 
 EL RESTO DE LOS INFORMES LOS PUEDE IGNORAR.
@@ -107,7 +107,7 @@ class App(customtkinter.CTk):
         "NARANJA", "VIOLETA", "GRIS", "NARANJA", "VIOLETA", "AMARILLO", "GRIS", "NARANJA", "AMARILLO", "VIOLETA"]
 
     def btn_cargar_pokedex_on_click(self):
-        for indice in range(100):
+        for indice in range(2):
             nombre = prompt("",f"Nombre del Planeta {indice + 1}")
             while nombre == None or nombre == "" or len(nombre) < 4:
                 nombre = prompt("",f"Nombre del Planeta {indice + 1} 4 LETRAS MINIMO")
@@ -137,6 +137,7 @@ class App(customtkinter.CTk):
         contador_amarillo = 0
         contador_violeta = 0
         contador_gris = 0
+        acumulador_A_segunda_letra = 0
 
         contador_entre_80_y_90 = 0
         suma_entre_80_y_90 = 0
@@ -144,12 +145,16 @@ class App(customtkinter.CTk):
         contador_contiene_letra_S = 0
         acum_80_90_empiezan_con_S = 0
 
+        contador_contiene_letra_R = 0
+        acumulador_E_segunda_letra = 0
+
         maxima_distancia = None
         minima_distancia = None
 
         suma_distancia = 0
 
         lista_planetas_contienen_S= []
+        lista_planetas_contienen_R= []
 
         for indice in range(len(self.lista_nombre_planetas)):
 
@@ -200,12 +205,24 @@ class App(customtkinter.CTk):
                     if self.lista_nombre_planetas[indice][0] == "S":
                         acum_80_90_empiezan_con_S += 1
                         self.informe_primer_letra = f"Hay {acum_80_90_empiezan_con_S} planetas que empiezan con la letra S q estan entre 80.000 y 90.000"
+                    if self.lista_nombre_planetas[indice][1] == "a":
+                        acumulador_A_segunda_letra += 1
+                    elif self.lista_nombre_planetas[indice][1] == "e":
+                        acumulador_E_segunda_letra += 1
                     if self.lista_nombre_planetas[indice][indice_letra] == "S" or self.lista_nombre_planetas[indice][indice_letra] == "s":
                         contador_contiene_letra_S += 1
                         lista_planetas_contienen_S.append(self.lista_nombre_planetas[indice])
+                    elif self.lista_nombre_planetas[indice][indice_letra] == "R" or self.lista_nombre_planetas[indice][indice_letra] == "r":
+                        contador_contiene_letra_R += 1
+                        lista_planetas_contienen_R.append(self.lista_nombre_planetas[indice])
+                   
+
 
         informe_2 = f"Hay {contador_contiene_letra_S} planetas que contiene en su nombre la letra 'S' y son {lista_planetas_contienen_S}"
         print(informe_2)
+
+        informe_3 = f"Hay {contador_contiene_letra_R} planetas que contiene en su nombre la letra 'R' y son {lista_planetas_contienen_R}"
+        print(informe_3)
 
         if contador_naranja > contador_amarillo and contador_naranja > contador_violeta and contador_naranja > contador_gris:
             color_predominante = "Naranja"
@@ -258,4 +275,3 @@ El planeta mas cerca del sol es "{nombre_minima_distancia}" con una distancia de
 if __name__ == "__main__":
     app = App()
     app.mainloop()
-

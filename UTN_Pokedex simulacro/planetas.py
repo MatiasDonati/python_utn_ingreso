@@ -131,14 +131,32 @@ class App(customtkinter.CTk):
         menos_de_70_amarillo = 0
         menos_de_70_violeta = 0
         menos_de_70_gris = 0
+        acumulador_menos_de_70 = 0
+
+        contador_naranja = 0
+        contador_amarillo = 0
+        contador_violeta = 0
+        contador_gris = 0
+
+        contador_entre_80_y_90 = 0
+        suma_entre_80_y_90 = 0
+
+        contador_contiene_letra_S = 0
+        acum_80_90_empiezan_con_S = 0
+
+        maxima_distancia = None
+        minima_distancia = None
+
         suma_distancia = 0
 
+        lista_planetas_contienen_S= []
+
         for indice in range(len(self.lista_nombre_planetas)):
-            # data_gral = f"""El planeta {self.lista_nombre_planetas[indice]} esta a {self.lista_distancia_planetas[indice]} minutos del sol y es de color {self.lista_color_planetas[indice]}\n"""
-            # print(data_gral)
 
             if self.lista_distancia_planetas[indice] < 70000:
                 menos_de_70000 += 1
+                acumulador_menos_de_70 += 1
+
                 match self.lista_color_planetas[indice]:
                     case "NARANJA":
                         menos_de_70_naranja += 1
@@ -148,7 +166,64 @@ class App(customtkinter.CTk):
                         menos_de_70_violeta += 1
                     case _:
                         menos_de_70_gris += 1
+
             suma_distancia += self.lista_distancia_planetas[indice]
+
+            match self.lista_color_planetas[indice]:
+                case "NARANJA":
+                   contador_naranja += 1
+                case "AMARILLO":
+                    contador_amarillo += 1
+                case "VIOLETA":
+                        contador_violeta += 1
+                case _:
+                    contador_gris += 1
+
+            if maxima_distancia == None or self.lista_distancia_planetas[indice] > maxima_distancia:
+                nombre_maxima_distancia = self.lista_nombre_planetas[indice]
+                color_maxima_distancia = self.lista_color_planetas[indice]
+                maxima_distancia = self.lista_distancia_planetas[indice]
+
+            if minima_distancia == None or self.lista_distancia_planetas[indice] < minima_distancia:
+                nombre_minima_distancia = self.lista_nombre_planetas[indice]
+                color_minima_distancia = self.lista_color_planetas[indice]
+                minima_distancia = self.lista_distancia_planetas[indice]
+
+            if self.lista_distancia_planetas[indice] > 80000 and self.lista_distancia_planetas[indice] < 90000:
+
+                contador_entre_80_y_90 += 1
+                suma_entre_80_y_90 += self.lista_distancia_planetas[indice]
+
+                for indice_letra in range(len(self.lista_nombre_planetas[indice])):
+                    informe = f"""Nombre "{self.lista_nombre_planetas[indice]}"\nLa letra "{self.lista_nombre_planetas[indice][indice_letra]}" esta en el indice {indice_letra} """
+                    # print(informe)
+                    if self.lista_nombre_planetas[indice][0] == "S":
+                        acum_80_90_empiezan_con_S += 1
+                        self.informe_primer_letra = f"Hay {acum_80_90_empiezan_con_S} planetas que empiezan con la letra S q estan entre 80.000 y 90.000"
+                    if self.lista_nombre_planetas[indice][indice_letra] == "S" or self.lista_nombre_planetas[indice][indice_letra] == "s":
+                        contador_contiene_letra_S += 1
+                        lista_planetas_contienen_S.append(self.lista_nombre_planetas[indice])
+
+        informe_2 = f"Hay {contador_contiene_letra_S} planetas que contiene en su nombre la letra 'S' y son {lista_planetas_contienen_S}"
+        print(informe_2)
+
+        if contador_naranja > contador_amarillo and contador_naranja > contador_violeta and contador_naranja > contador_gris:
+            color_predominante = "Naranja"
+        elif contador_amarillo > contador_violeta and contador_amarillo > contador_gris:
+            color_predominante = "Amarillo"
+        elif contador_violeta > contador_gris:
+            color_predominante = "Violeta"
+        else:
+            color_predominante = "Gris"
+
+        if contador_naranja < contador_amarillo and contador_naranja < contador_violeta and contador_naranja < contador_gris:
+            menor_color = "Naranja"
+        elif contador_amarillo < contador_violeta and contador_amarillo < contador_gris:
+            menor_color = "Amarillo"
+        elif contador_violeta < contador_gris:
+            menor_color = "Violeta"
+        else:
+            menor_color = "Gris"
 
         if menos_de_70_naranja > menos_de_70_amarillo and menos_de_70_naranja > menos_de_70_violeta and menos_de_70_naranja > menos_de_70_gris:
             color_predominante_menor_70_color = "Naranja"
@@ -170,11 +245,15 @@ class App(customtkinter.CTk):
 
         gral_promedio_distancia = suma_distancia / len(self.lista_distancia_planetas)
 
-        informe = f""" Hay {menos_de_70000} planetas a menos de 70.000 minutos del sol y el color predominante de ese grupo es el {color_predominante_menor_70_color}.. del que menos color hay es {menos_color_menor_70_color}\n
-El promedio gral de distancia es de {gral_promedio_distancia}"""
+        promedio_distancia_menos_de_70000 = menos_de_70000 / acumulador_menos_de_70
+
+        informe = f""" Hay {menos_de_70000} planetas a menos de 70.000 minutos del sol y el color predominante de ese grupo es el {color_predominante_menor_70_color}.. del que menos color hay es {menos_color_menor_70_color}.
+Y el promedio de distancia los planetas a menos de 70000 minutos del sol es de {promedio_distancia_menos_de_70000} \n
+El promedio gral de distancia es de {gral_promedio_distancia}\nEl color predominante en total es {color_predominante} y el que menos hay es {menor_color}\n
+El planeta mas lejos del sol es "{nombre_maxima_distancia}" con una distancia de {maxima_distancia} y es de color {color_maxima_distancia}\n
+El planeta mas cerca del sol es "{nombre_minima_distancia}" con una distancia de {minima_distancia} y es de color {color_minima_distancia}\n """
 
         print(informe)
-
 
 if __name__ == "__main__":
     app = App()

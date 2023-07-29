@@ -88,7 +88,8 @@ class App(customtkinter.CTk):
         self.btn_mostrar = customtkinter.CTkButton(master=self, text="Mostrar Pokedex", command=self.btn_mostrar_pokedex_on_click)
         self.btn_mostrar.grid(row=3, pady=10, columnspan=2, sticky="nsew")
 
-        # Cargar aca los pokemones
+        # Cargar de Datos // Planetas 
+
         self.lista_nombre_planetas = ["Saturno", "Marte", "Venus", "Neptuno", "Júpiter", "Mercurio", "Urano", "Tierra", "Plutón", "Ceres",
         "Eris", "Haumea", "Sedna", "Makemake", "Orcus", "Quaoar", "Varuna", "Ixion", "Huya", "Salacia",
         "Gonggong", "Vesta", "Juno", "Pallas", "Palas", "Caronte", "Ganimedes", "Calisto", "Europa", "Ganímedes",
@@ -123,6 +124,7 @@ class App(customtkinter.CTk):
             while color != "NARANJA" and color != "AMARILLO" and color != "VIOLETA" and color != "GRIS":
                 color = prompt("", "Color ... NARANJA AMARILLO VIOLETA O GRIS").upper()
             self.lista_color_planetas.append()
+
 
     def btn_mostrar_pokedex_on_click(self):
 
@@ -205,17 +207,18 @@ class App(customtkinter.CTk):
                     if self.lista_nombre_planetas[indice][0] == "S":
                         acum_80_90_empiezan_con_S += 1
                         self.informe_primer_letra = f"Hay {acum_80_90_empiezan_con_S} planetas que empiezan con la letra S q estan entre 80.000 y 90.000"
+
                     if self.lista_nombre_planetas[indice][1] == "a":
                         acumulador_A_segunda_letra += 1
                     elif self.lista_nombre_planetas[indice][1] == "e":
                         acumulador_E_segunda_letra += 1
+
                     if self.lista_nombre_planetas[indice][indice_letra] == "S" or self.lista_nombre_planetas[indice][indice_letra] == "s":
                         contador_contiene_letra_S += 1
                         lista_planetas_contienen_S.append(self.lista_nombre_planetas[indice])
                     elif self.lista_nombre_planetas[indice][indice_letra] == "R" or self.lista_nombre_planetas[indice][indice_letra] == "r":
                         contador_contiene_letra_R += 1
                         lista_planetas_contienen_R.append(self.lista_nombre_planetas[indice])
-                   
 
 
         informe_2 = f"Hay {contador_contiene_letra_S} planetas que contiene en su nombre la letra 'S' y son {lista_planetas_contienen_S}"

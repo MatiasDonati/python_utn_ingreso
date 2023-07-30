@@ -266,13 +266,13 @@ class App(customtkinter.CTk):
                     if self.medio_pago[indice] == "Debito":
                         cantidad_platea_debito +=1
                         # Ver si es numero primo...
-                        lista_numeros = []
-                        for numero in range(self.edades[indice]):
-                            if numero > 0:
-                                if self.edades[indice] % numero == 0:
-                                    lista_numeros.append(numero)
-                                if len(lista_numeros) == 2:
-                                    cantidad_platea_edad_numero_primo += 1
+                    lista_numeros = []
+                    for numero in range(self.edades[indice]):
+                        if numero > 0:
+                            if self.edades[indice] % numero == 0:
+                                lista_numeros.append(numero)
+                    if len(lista_numeros) == 2:
+                        cantidad_platea_edad_numero_primo += 1
             if self.tipo_entrada[indice] == "Platea":
                 suma_edades_platea += self.edades[indice]
                 cantidad_edades_platea += 1
@@ -289,8 +289,16 @@ class App(customtkinter.CTk):
 
             if maxima_edad == None or self.edades[indice] > maxima_edad:
                maxima_edad = self.edades[indice]
+
+        # Vuelvo a recorrer las listas porq necesito tener el dato de MAXIMA EDAD para hacer lo siguiente..
+        for indice in range(len(self.nombres)):
             if self.edades[indice] == maxima_edad and self.generos[indice] == "Masculino" and self.tipo_entrada[indice] == "General":
                 nombres_maxima_edad_masculino_entrada_gral.append(self.nombres[indice])
+                cantidad_nombres_maxima_edad_masculino_entrada_gral = len(nombres_maxima_edad_masculino_entrada_gral)
+            else:
+                nombres_maxima_edad_masculino_entrada_gral = "Hay solo una persona con la edad maxima"
+                cantidad_nombres_maxima_edad_masculino_entrada_gral = "Hay solo una persona con la edad maxima"
+
 
         cantidad_entradas_vendidas = cantidad_general + cantidad_campo_delantero + cantidad_platea
         porcentaje_entradas_general = cantidad_general / cantidad_entradas_vendidas * 100
@@ -328,7 +336,7 @@ class App(customtkinter.CTk):
         informe = f"""La recaudacion total es de {suma_precio_entradas}\nSe vendieron {cantidad_general} Genral, {cantidad_campo_delantero} campo delantero y {cantidad_platea} platea\n\n
         El promedio de edades de los compradores de platea es {promedio_edades_platea_redondeado}\n El porcentaje de entradas General es {porcentaje_entradas_general_redondeado}
         Quienes son mayores de edad, de genero masculino y compraron entradas General son {nombres_mayor_de_edad_masculino_entrada_gral}\n
-        Las personas que mas edad tiene son {len(nombres_maxima_edad_masculino_entrada_gral)} y son los siguientes: {nombres_maxima_edad_masculino_entrada_gral}\n\n
+        Las personas que mas edad tienen son {cantidad_nombres_maxima_edad_masculino_entrada_gral} y son los siguientes: {nombres_maxima_edad_masculino_entrada_gral}\n\n
         Las entradas mas vendidas son de tipo {entradas_mas_vendida}
         El genero mas frecuente q compraron 'Campo delantero' son {mayor_genero_campo_delantero}
         El promedio de edades de los que sacaron entrada General y compraron con tarjeta de Crecito es: {promedio_tipo_general_credito_redondeado}
